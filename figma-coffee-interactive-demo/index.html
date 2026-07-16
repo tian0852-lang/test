@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>咖啡点单 · 交互示例</title>
+  <style>
+    :root { --ink:#171717; --paper:#f5f3ed; --coffee:#c67c4e; --muted:#79756f; }
+    * { box-sizing:border-box; } body { margin:0; min-height:100vh; background:var(--paper); color:var(--ink); font-family:ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .shell { min-height:100vh; display:grid; grid-template-columns:1fr minmax(390px, 620px); gap:clamp(30px,7vw,140px); align-items:center; padding:clamp(28px,6vw,100px); background-image:linear-gradient(#1717170c 1px,transparent 1px),linear-gradient(90deg,#1717170c 1px,transparent 1px); background-size:42px 42px; }
+    .intro { max-width:570px; align-self:center; } .eyebrow { color:var(--coffee); font-weight:800; letter-spacing:.1em; font-size:13px; }
+    h1 { font-family:Georgia,"Songti SC",serif; font-size:clamp(46px,6vw,92px); letter-spacing:-.065em; line-height:.98; margin:22px 0 28px; }
+    .intro p { color:#4e4b46; font:16px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; max-width:490px; }
+    .route { margin-top:42px; border-top:1px solid #171717; padding-top:18px; display:flex; gap:8px; flex-wrap:wrap; font-size:12px; font-weight:800; } .route span { border:1px solid #171717; border-radius:999px; padding:8px 11px; background:#fff9; } .route .active { background:var(--coffee); color:white; border-color:var(--coffee); }
+    .source { display:inline-flex; margin-top:34px; color:#171717; font-weight:800; font-size:13px; text-decoration-thickness:1px; text-underline-offset:4px; }
+    .stage { display:grid; place-items:center; min-height:860px; position:relative; } .phone { position:relative; width:min(375px,82vw); aspect-ratio:375/812; overflow:hidden; border:10px solid #171717; border-radius:43px; background:#fff; box-shadow:20px 20px 0 #c67c4e3d; }
+    .phone:before { content:""; position:absolute; top:8px; left:50%; transform:translateX(-50%); width:92px; height:23px; border-radius:0 0 15px 15px; background:#171717; z-index:5; } .phone:after { content:"交互原型"; position:absolute; z-index:6; right:15px; top:14px; color:white; font-size:8px; letter-spacing:.06em; }
+    .screen { position:absolute; inset:0; opacity:0; transform:translateX(7%); pointer-events:none; transition:opacity .34s ease,transform .34s cubic-bezier(.2,.8,.2,1); } .screen.show { opacity:1; transform:none; pointer-events:auto; } .screen img { display:block; width:100%; height:100%; object-fit:cover; }
+    .hotspot { position:absolute; border:0; padding:0; cursor:pointer; background:transparent; border-radius:14px; } .hotspot:hover { outline:3px solid #fff9; outline-offset:-3px; } .hotspot:focus-visible { outline:4px solid #fff; outline-offset:-4px; }
+    #start { left:6%; right:6%; height:8%; bottom:7%; } #product { left:6%; width:43%; height:30%; top:48%; } #buy { left:35%; right:6%; height:11%; bottom:7%; } #order { left:6%; right:6%; height:9%; bottom:5%; } #back { left:5%; width:14%; height:9%; top:8%; }
+    .hint { position:absolute; left:calc(50% + 230px); top:40%; width:170px; background:#171717; color:#fff; padding:14px; font-size:12px; line-height:1.5; font-weight:700; } .hint:before { content:""; position:absolute; left:-10px; top:25px; width:20px; height:20px; background:#171717; transform:rotate(45deg); z-index:-1; }
+    .progress { position:absolute; bottom:27px; left:50%; transform:translateX(-50%); display:flex; gap:8px; } .dot { width:8px; height:8px; background:#d5d1c9; border-radius:50%; transition:.25s; } .dot.on { width:26px; border-radius:8px; background:var(--coffee); }
+    @media (max-width:860px){ .shell{grid-template-columns:1fr; padding:34px 22px 56px; gap:18px}.intro{max-width:620px}.stage{min-height:790px}.hint{display:none}h1{font-size:56px}.source{margin-top:18px} }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="intro"><div class="eyebrow">FIGMA → INTERACTIVE DEMO</div><h1>咖啡点单<br>交互示例</h1><p>基于原设计稿的五个高保真界面，演示从欢迎页进入商品浏览、查看详情、提交订单到配送跟踪的完整流程。</p><div class="route"><span class="active">01 欢迎</span><span>02 浏览</span><span>03 商品</span><span>04 下单</span><span>05 配送</span></div><a class="source" href="https://www.figma.com/design/HinSrwMz5iUva4yQxUB1d5/%E4%BA%A4%E4%BA%92%E7%A4%BA%E4%BE%8B?node-id=0-1&t=fvXb0wuplQKdcrtq-1" target="_blank" rel="noreferrer">打开 Figma 设计稿 ↗</a></section>
+    <section class="stage" aria-label="咖啡点单交互原型"><div class="phone">
+      <article class="screen show" data-step="0"><img src="assets/onboarding.png" alt="欢迎页"><button class="hotspot" id="start" aria-label="开始体验"></button></article>
+      <article class="screen" data-step="1"><img src="assets/home.png" alt="咖啡首页"><button class="hotspot" id="product" aria-label="查看 Caffe Mocha"></button></article>
+      <article class="screen" data-step="2"><img src="assets/detail.png" alt="商品详情"><button class="hotspot" id="buy" aria-label="立即购买"></button></article>
+      <article class="screen" data-step="3"><img src="assets/order.png" alt="结算订单"><button class="hotspot" id="order" aria-label="提交订单"></button></article>
+      <article class="screen" data-step="4"><img src="assets/delivery.png" alt="配送跟踪"><button class="hotspot" id="back" aria-label="返回首页"></button></article>
+    </div><div class="hint" id="hint">点击 <b>Get Started</b><br>开始点单流程</div><div class="progress" aria-label="流程进度"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div></section>
+  </main>
+  <script>
+    const screens=[...document.querySelectorAll('.screen')],dots=[...document.querySelectorAll('.dot')],hint=document.querySelector('#hint');
+    const labels=['点击 Get Started 开始点单流程','选择 Caffe Mocha 查看商品详情','点击 Buy Now 进入订单结算','点击 Order 确认并发起配送','配送跟踪已完成；点击左上角返回'];
+    function go(step){screens.forEach((screen,i)=>screen.classList.toggle('show',i===step));dots.forEach((dot,i)=>dot.classList.toggle('on',i===step));hint.innerHTML=labels[step];}
+    document.querySelector('#start').addEventListener('click',()=>go(1));document.querySelector('#product').addEventListener('click',()=>go(2));document.querySelector('#buy').addEventListener('click',()=>go(3));document.querySelector('#order').addEventListener('click',()=>go(4));document.querySelector('#back').addEventListener('click',()=>go(1));
+  </script>
+</body></html>
