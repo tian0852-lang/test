@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Figma 交互示例 Banner</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="banner" aria-label="交互示例轮播图" aria-roledescription="carousel">
+        <div class="banner__viewport" id="bannerViewport" tabindex="0">
+          <div class="banner__track" id="bannerTrack">
+            <article class="banner__slide" aria-roledescription="slide" aria-label="第 1 张，共 3 张">
+              <div class="banner__visual visual--warm">
+                <img src="./banner-request.png" alt="Figma 交互示例中的需求画面" />
+              </div>
+            </article>
+
+            <article class="banner__slide" aria-roledescription="slide" aria-label="第 2 张，共 3 张">
+              <div class="banner__visual visual--lime">
+                <img src="./banner-solution.png" alt="Figma 交互示例中的方案画面" />
+              </div>
+            </article>
+
+            <article class="banner__slide" aria-roledescription="slide" aria-label="第 3 张，共 3 张">
+              <div class="banner__visual visual--lavender">
+                <img src="./banner-code.png" alt="Figma 交互示例中的代码画面" />
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="banner__controls">
+          <div class="banner__arrows">
+            <button class="circle-button" type="button" id="prevButton" aria-label="上一张">
+              <span aria-hidden="true">←</span>
+            </button>
+            <button class="circle-button circle-button--dark" type="button" id="nextButton" aria-label="下一张">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="banner__dots" role="tablist" aria-label="选择轮播图片">
+            <button class="dot is-active" type="button" role="tab" aria-selected="true" aria-label="显示第 1 张"></button>
+            <button class="dot" type="button" role="tab" aria-selected="false" aria-label="显示第 2 张"></button>
+            <button class="dot" type="button" role="tab" aria-selected="false" aria-label="显示第 3 张"></button>
+          </div>
+
+          <button class="pause-button" type="button" id="pauseButton" aria-pressed="false">
+            <span aria-hidden="true">Ⅱ</span><span>暂停</span>
+          </button>
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
